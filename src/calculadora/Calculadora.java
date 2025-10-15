@@ -21,9 +21,14 @@ public class Calculadora extends JFrame {
     
     //Botones Derivaciones
     private JButton Der0, Der1, Der2, Der3, Der4, Der5, Der6, Der7, Der8, Der9;
-    private JButton DerX, DerExp, DerMult, DerResultado, Der, DerY;
-    //Mostrar Formula
-    private JTextField DerFormula;
+    private JButton DerX, DerY, DerExp, DerMult, DerResultado;
+    
+    //Botones Integrales 
+    private JButton Intg0, Intg1, Intg2, Intg3, Intg4, Intg5, Intg6, Intg7, Intg8, Intg9;
+    private JButton IntgX, IntgY, IntgExp, IntgMult, IntgResultado, IntgI;
+    
+    //Texfield entrada de Formula
+    private JTextField DerFormula, IntgFormula;
     
 public Calculadora(){
     cardlayout = new CardLayout();
@@ -44,6 +49,7 @@ public Calculadora(){
     
     setTitle("Integratron");
     setSize(1000,1000);
+    setLocationRelativeTo(null);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 }
@@ -78,12 +84,20 @@ public void crearMenu(){
     Menu.add(btnIntegral);
     
     btnDerivada.addActionListener(e -> cambiarDerivada());
+    btnIntegral.addActionListener(e -> cambiarIntegral());
 }
 
 public void crearDerivada(){
     Derivada = new JPanel();
     Derivada.setLayout(null);
     Derivada.setBackground(new Color(48, 48, 54));
+    
+    //Boton de navegación
+    btnIntegral = new JButton("Calcular Integrales =3");
+    btnIntegral.setFont(new Font("Arial", Font.BOLD, 16));
+    btnIntegral.setBackground(new Color(48, 188, 237));
+    btnIntegral.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
+    btnIntegral.setBounds(350, 30, 300, 40);
     
     //Botones de Accion
     Der0 = new JButton("0");
@@ -96,12 +110,11 @@ public void crearDerivada(){
     Der7 = new JButton("7");
     Der8 = new JButton("8");
     Der9 = new JButton("9");
-    DerX = new JButton("X");
+    DerX = new JButton("x");
     DerMult = new JButton("*");
     DerExp = new JButton("^");
     DerResultado = new JButton("=");
-    Der = new JButton("∫");
-    DerY = new JButton("Y");
+    DerY = new JButton("y");
     
     Der0.setBounds(175, 825, 120, 120);
     Der1.setBounds(50, 700, 120, 120);
@@ -117,7 +130,6 @@ public void crearDerivada(){
     DerMult.setBounds(425, 450, 120, 120);
     DerExp.setBounds(550, 450, 120, 120);
     DerResultado.setBounds(550, 700, 120, 120);
-    Der.setBounds(425, 700, 120, 120);
     DerY.setBounds(425, 575, 120, 120);
     
     EstiloBoton(Der0);
@@ -134,7 +146,6 @@ public void crearDerivada(){
     EstiloBoton(DerMult);
     EstiloBoton(DerExp);
     EstiloBoton(DerResultado);
-    EstiloBoton(Der);
     EstiloBoton(DerY);
     
     // Formula
@@ -159,23 +170,123 @@ public void crearDerivada(){
     Derivada.add(DerExp);
     Derivada.add(DerResultado);
     Derivada.add(DerFormula);
-    Derivada.add(Der);
     Derivada.add(DerY);
+    Derivada.add(btnIntegral);
+    
+    btnIntegral.addActionListener(e -> cambiarIntegral());
 }
 
 public void crearIntegral(){
     Integral = new JPanel();
     Integral.setLayout(null);
+    Integral.setBackground(new Color(48, 48, 54));
+    
+    //Boton navegación
+    btnDerivada = new JButton("Calcular Derivadas =D");
+    btnDerivada.setFont(new Font("Arial", Font.BOLD, 16));
+    btnDerivada.setBackground(new Color(48, 188, 237));
+    btnDerivada.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
+    btnDerivada.setBounds(350, 30, 300, 40);
+    
+        //Botones de Accion
+    Intg0 = new JButton("0");
+    Intg1 = new JButton("1");
+    Intg2 = new JButton("2");
+    Intg3 = new JButton("3");
+    Intg4 = new JButton("4");
+    Intg5 = new JButton("5");
+    Intg6 = new JButton("6");
+    Intg7 = new JButton("7");
+    Intg8 = new JButton("8");
+    Intg9 = new JButton("9");
+    IntgX = new JButton("x");
+    IntgY = new JButton("y");
+    IntgMult = new JButton("*");
+    IntgExp = new JButton("^");
+    IntgResultado = new JButton("=");
+    IntgI = new JButton("∫");
+    
+    
+    Intg0.setBounds(175, 825, 120, 120);
+    Intg1.setBounds(50, 700, 120, 120);
+    Intg2.setBounds(175, 700, 120, 120);
+    Intg3.setBounds(300, 700, 120, 120);
+    Intg4.setBounds(50, 575, 120, 120);
+    Intg5.setBounds(175, 575, 120, 120);
+    Intg6.setBounds(300, 575, 120, 120);
+    Intg7.setBounds(50, 450, 120, 120);
+    Intg8.setBounds(175, 450, 120, 120);
+    Intg9.setBounds(300, 450, 120, 120);
+    IntgX.setBounds(550, 575, 120, 120);
+    IntgY.setBounds(425, 575, 120, 120);
+    IntgMult.setBounds(425, 450, 120, 120);
+    IntgExp.setBounds(550, 450, 120, 120);
+    IntgResultado.setBounds(550, 700, 120, 120);
+    IntgI.setBounds(425, 700, 120, 120);
+    
+    
+    EstiloBoton(Intg0);
+    EstiloBoton(Intg1);
+    EstiloBoton(Intg2);
+    EstiloBoton(Intg3);
+    EstiloBoton(Intg4);
+    EstiloBoton(Intg5);
+    EstiloBoton(Intg6);
+    EstiloBoton(Intg7);
+    EstiloBoton(Intg8);
+    EstiloBoton(Intg9);
+    EstiloBoton(IntgX);
+    EstiloBoton(IntgY);
+    EstiloBoton(IntgMult);
+    EstiloBoton(IntgExp);
+    EstiloBoton(IntgResultado);
+    EstiloBoton(IntgI);
+    
+    
+    // Formula
+    IntgFormula = new JTextField();
+    IntgFormula.setBounds(50, 200, 900, 100);
+    IntgFormula.setFont(new Font("Arial", Font.BOLD, 30));
+    IntgFormula.setHorizontalAlignment(JTextField.CENTER);
+    IntgFormula.setEditable(false);
+    
+    Integral.add(Intg0);
+    Integral.add(Intg1);
+    Integral.add(Intg2);
+    Integral.add(Intg3);
+    Integral.add(Intg4);
+    Integral.add(Intg5);
+    Integral.add(Intg6);
+    Integral.add(Intg7);
+    Integral.add(Intg8);
+    Integral.add(Intg9);
+    Integral.add(IntgX);
+    Integral.add(IntgY);
+    Integral.add(IntgMult);
+    Integral.add(IntgExp);
+    Integral.add(IntgResultado);
+    Integral.add(IntgFormula);
+    Integral.add(IntgI);
+    Integral.add(btnDerivada);
+    
+    btnDerivada.addActionListener(e -> cambiarDerivada());
+    
 }
 
 public void cambiarDerivada(){
     cardlayout.show(PanelPrincipal, "derivada");
 }
 
+public void cambiarIntegral(){
+    cardlayout.show(PanelPrincipal, "integral");
+}
+
 public static void EstiloBoton(JButton boton){
     boton.setFont(new Font("Arial", Font.BOLD, 20));
     boton.setBackground(new Color(48, 188, 237));
 }
+
+
     /**
      * @param args the command line arguments
      */
