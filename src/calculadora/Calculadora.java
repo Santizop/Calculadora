@@ -21,7 +21,8 @@ public class Calculadora extends JFrame {
     
     //Botones Derivaciones
     private JButton Der0, Der1, Der2, Der3, Der4, Der5, Der6, Der7, Der8, Der9;
-    private JButton DerX, DerY, DerExp, DerMult, DerResultado;
+    private JButton DerX, DerY, DerMas, DerMenos, DerAtras, DerExp, DerMult, DerResultado;
+    private JButton DerFx, DerFy;
     
     //Botones Integrales 
     private JButton Intg0, Intg1, Intg2, Intg3, Intg4, Intg5, Intg6, Intg7, Intg8, Intg9;
@@ -29,6 +30,7 @@ public class Calculadora extends JFrame {
     
     //Texfield entrada de Formula
     private JTextField DerFormula, IntgFormula;
+    private JTextField DerEje;
     
 public Calculadora(){
     cardlayout = new CardLayout();
@@ -100,6 +102,8 @@ public void crearDerivada(){
     btnIntegral.setBounds(350, 30, 300, 40);
     
     //Botones de Accion
+    DerFx = new JButton("fx");
+    DerFy = new JButton("fy");
     Der0 = new JButton("0");
     Der1 = new JButton("1");
     Der2 = new JButton("2");
@@ -111,11 +115,16 @@ public void crearDerivada(){
     Der8 = new JButton("8");
     Der9 = new JButton("9");
     DerX = new JButton("x");
+    DerMas = new JButton("+");
+    DerMenos = new JButton("-");
+    DerAtras = new JButton("Limpiar");
     DerMult = new JButton("*");
     DerExp = new JButton("^");
     DerResultado = new JButton("=");
     DerY = new JButton("y");
     
+    DerFx.setBounds(550, 150, 80, 80);
+    DerFy.setBounds(640, 150, 80, 80);
     Der0.setBounds(175, 825, 120, 120);
     Der1.setBounds(50, 700, 120, 120);
     Der2.setBounds(175, 700, 120, 120);
@@ -127,11 +136,16 @@ public void crearDerivada(){
     Der8.setBounds(175, 450, 120, 120);
     Der9.setBounds(300, 450, 120, 120);
     DerX.setBounds(550, 575, 120, 120);
+    DerMas.setBounds(425, 700, 120, 120);
+    DerMenos.setBounds(550, 700, 120, 120);
     DerMult.setBounds(425, 450, 120, 120);
     DerExp.setBounds(550, 450, 120, 120);
-    DerResultado.setBounds(550, 700, 120, 120);
+    DerResultado.setBounds(675, 700, 120, 120);
     DerY.setBounds(425, 575, 120, 120);
+    DerAtras.setBounds(675, 450, 120, 120);
     
+    EstiloBoton(DerFx);
+    EstiloBoton(DerFy);
     EstiloBoton(Der0);
     EstiloBoton(Der1);
     EstiloBoton(Der2);
@@ -143,18 +157,28 @@ public void crearDerivada(){
     EstiloBoton(Der8);
     EstiloBoton(Der9);
     EstiloBoton(DerX);
+    EstiloBoton(DerMas);
+    EstiloBoton(DerMenos);
     EstiloBoton(DerMult);
     EstiloBoton(DerExp);
     EstiloBoton(DerResultado);
     EstiloBoton(DerY);
+    EstiloBoton(DerAtras);
     
     // Formula
+    DerEje = new JTextField();
+    DerEje.setBounds(300, 150, 120, 80);
+    DerEje.setFont(new Font("Arial", Font.BOLD, 30));
+    DerEje.setHorizontalAlignment(JTextField.CENTER);
+    DerEje.setEditable(false);
     DerFormula = new JTextField();
-    DerFormula.setBounds(50, 200, 900, 100);
+    DerFormula.setBounds(50, 280, 900, 100);
     DerFormula.setFont(new Font("Arial", Font.BOLD, 30));
     DerFormula.setHorizontalAlignment(JTextField.CENTER);
     DerFormula.setEditable(false);
     
+    Derivada.add(DerFx);
+    Derivada.add(DerFy);
     Derivada.add(Der0);
     Derivada.add(Der1);
     Derivada.add(Der2);
@@ -166,14 +190,20 @@ public void crearDerivada(){
     Derivada.add(Der8);
     Derivada.add(Der9);
     Derivada.add(DerX);
+    Derivada.add(DerMas);
+    Derivada.add(DerMenos);
     Derivada.add(DerMult);
     Derivada.add(DerExp);
     Derivada.add(DerResultado);
+    Derivada.add(DerEje);
     Derivada.add(DerFormula);
     Derivada.add(DerY);
     Derivada.add(btnIntegral);
+    Derivada.add(DerAtras);
     
     btnIntegral.addActionListener(e -> cambiarIntegral());
+    
+    IngresoDatosDer();
 }
 
 public void crearIntegral(){
@@ -279,6 +309,29 @@ public void cambiarDerivada(){
 
 public void cambiarIntegral(){
     cardlayout.show(PanelPrincipal, "integral");
+}
+
+public void IngresoDatosDer(){
+    JButton[] botonesEje = {DerFx, DerFy};
+    
+    for (JButton Eje: botonesEje){
+        Eje.addActionListener(e ->{
+            DerEje.setText(Eje.getText());
+        });
+    }
+    
+    JButton[] botones = {Der0, Der1, Der2, Der3, Der4, Der5, Der6, Der7, Der8, Der9,
+                         DerX, DerY, DerMas, DerMenos, DerMult, DerExp};
+    
+    for (JButton boton: botones){
+        boton.addActionListener(e -> {
+            DerFormula.setText(DerFormula.getText() + boton.getText());
+        });
+    }
+    
+    DerAtras.addActionListener(e ->{
+        DerFormula.setText("");
+    });
 }
 
 public static void EstiloBoton(JButton boton){
