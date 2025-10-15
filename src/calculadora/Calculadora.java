@@ -21,7 +21,7 @@ public class Calculadora extends JFrame {
     
     //Botones Derivaciones
     private JButton Der0, Der1, Der2, Der3, Der4, Der5, Der6, Der7, Der8, Der9;
-    private JButton DerX, DerExp, DerMult, DerResultado;
+    private JButton DerX, DerExp, DerMult, DerResultado, Der, DerY;
     //Mostrar Formula
     private JTextField DerFormula;
     
@@ -96,10 +96,12 @@ public void crearDerivada(){
     Der7 = new JButton("7");
     Der8 = new JButton("8");
     Der9 = new JButton("9");
-    DerX = new JButton("x");
+    DerX = new JButton("X");
     DerMult = new JButton("*");
     DerExp = new JButton("^");
     DerResultado = new JButton("=");
+    Der = new JButton("∫");
+    DerY = new JButton("Y");
     
     Der0.setBounds(175, 825, 120, 120);
     Der1.setBounds(50, 700, 120, 120);
@@ -111,10 +113,12 @@ public void crearDerivada(){
     Der7.setBounds(50, 450, 120, 120);
     Der8.setBounds(175, 450, 120, 120);
     Der9.setBounds(300, 450, 120, 120);
-    DerX.setBounds(425, 700, 120, 120);
-    DerMult.setBounds(425, 575, 120, 120);
-    DerExp.setBounds(425, 450, 120, 120);
+    DerX.setBounds(550, 575, 120, 120);
+    DerMult.setBounds(425, 450, 120, 120);
+    DerExp.setBounds(550, 450, 120, 120);
     DerResultado.setBounds(550, 700, 120, 120);
+    Der.setBounds(425, 700, 120, 120);
+    DerY.setBounds(425, 575, 120, 120);
     
     EstiloBoton(Der0);
     EstiloBoton(Der1);
@@ -130,6 +134,8 @@ public void crearDerivada(){
     EstiloBoton(DerMult);
     EstiloBoton(DerExp);
     EstiloBoton(DerResultado);
+    EstiloBoton(Der);
+    EstiloBoton(DerY);
     
     // Formula
     DerFormula = new JTextField();
@@ -153,6 +159,8 @@ public void crearDerivada(){
     Derivada.add(DerExp);
     Derivada.add(DerResultado);
     Derivada.add(DerFormula);
+    Derivada.add(Der);
+    Derivada.add(DerY);
 }
 
 public void crearIntegral(){
