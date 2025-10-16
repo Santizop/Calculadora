@@ -21,7 +21,7 @@ public class OperacionDerivacion {
         } else if (Variable.equals("fy")) {
             DerivarRespectoY();
         } else {
-            calculadora.MostrarResultadoDer("Selecciona un eje (fx o fy)");
+            
         }
     }
 
@@ -36,46 +36,63 @@ public class OperacionDerivacion {
     }
     
     private String Derivar(String formula, String var) {
-        String[] terminos = formula.split("(?=[+-])");
-        StringBuilder resultado = new StringBuilder();
+    String[] terminos = formula.split("(?=[+-])");
+    StringBuilder resultado = new StringBuilder();
 
-        for (String t : terminos) {
-            t = t.trim();
+    for (String t : terminos) {
+        t = t.trim();
+        if (t.isEmpty()) continue;
 
-            if (!t.contains(var)) {
-                continue;
-            }
+        // Funcion sin variable = 0
+        if (!t.contains(var)) continue;
 
-            // Derivada de x -> 1
-//            if (t.equals(var)) {
-//                resultado.append("+1");
-//            }
-            
-            if (t.contains("x^")) {
-            // CASO 4: Potencia
-            String[] partes = t.split("x\\^");
-            String coefStr = partes[0].replace("+", "").trim(); // quita +
+        int coef = 1;
+        int exp = 1;
+
+        // Detectar si hay exponente, como "x^3"
+        if (t.contains(var + "^")) {
+            String[] partes = t.split(var + "\\^");
+            String coefStr = partes[0].replace("+", "").trim();
+
             if (coefStr.equals("") || coefStr.equals("+")) coefStr = "1";
             if (coefStr.equals("-")) coefStr = "-1";
 
-            int coef = Integer.parseInt(coefStr);
-            int exp = Integer.parseInt(partes[1].trim());
+            coef = Integer.parseInt(coefStr);
+            exp = Integer.parseInt(partes[1].trim());
 
+            // Aplicar derivada: coef * exp, y reducir exponente en 1
             int nuevoCoef = coef * exp;
             int nuevoExp = exp - 1;
 
             if (nuevoExp == 1)
-                resultado.append(nuevoCoef + "x");
+                resultado.append(signo(resultado, nuevoCoef)).append(Math.abs(nuevoCoef)).append(var);
             else if (nuevoExp == 0)
-                resultado.append(nuevoCoef);
+                resultado.append(signo(resultado, nuevoCoef)).append(Math.abs(nuevoCoef));
             else
-                resultado.append(nuevoCoef + "x^" + nuevoExp);
-            }
+                resultado.append(signo(resultado, nuevoCoef)).append(Math.abs(nuevoCoef)).append(var).append("^").append(nuevoExp);
+
+        } else if (t.contains(var)) {
+            // Caso sin exponente explícito: "3x", "-x", "+x"
+            String coefStr = t.replace(var, "").replace("+", "").trim();
+            if (coefStr.equals("") || coefStr.equals("+")) coefStr = "1";
+            if (coefStr.equals("-")) coefStr = "-1";
+
+            coef = Integer.parseInt(coefStr);
+            int nuevoCoef = coef; // derivada de ax = a
+
+            resultado.append(signo(resultado, nuevoCoef)).append(Math.abs(nuevoCoef));
         }
+    }
 
-        if (resultado.length() == 0)
-            resultado.append("0");
+    if (resultado.length() == 0)
+        resultado.append("0");
 
-        return resultado.toString();
+    return resultado.toString();
+}
+
+// 🔹 Función auxiliar para poner + o - correctamente
+    private String signo(StringBuilder resultado, int valor) {
+        if (resultado.length() == 0) return valor < 0 ? "-" : "";
+        return valor < 0 ? " - " : " + ";
     }
 }

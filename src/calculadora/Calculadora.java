@@ -343,6 +343,7 @@ public void IngresoDatosDer(){
     
     DerAtras.addActionListener(e ->{
         DerFormula.setText("");
+        DerResultado.setText("");
     });
 }
 
