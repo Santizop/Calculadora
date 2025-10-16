@@ -21,7 +21,7 @@ public class Calculadora extends JFrame {
     
     //Botones Derivaciones
     private JButton Der0, Der1, Der2, Der3, Der4, Der5, Der6, Der7, Der8, Der9;
-    private JButton DerX, DerY, DerMas, DerMenos, DerAtras, DerExp, DerMult, DerResultado;
+    private JButton DerX, DerY, DerMas, DerMenos, DerAtras, DerExp, DerMult, DerIgual;
     private JButton DerFx, DerFy;
     
     //Botones Integrales 
@@ -29,7 +29,7 @@ public class Calculadora extends JFrame {
     private JButton IntgX, IntgY, IntgExp, IntgMult, IntgResultado, IntgI;
     
     //Texfield entrada de Formula
-    private JTextField DerFormula, IntgFormula;
+    private JTextField DerFormula, DerResultado, IntgFormula;
     private JTextField DerEje;
     
 public Calculadora(){
@@ -120,7 +120,7 @@ public void crearDerivada(){
     DerAtras = new JButton("Limpiar");
     DerMult = new JButton("*");
     DerExp = new JButton("^");
-    DerResultado = new JButton("=");
+    DerIgual = new JButton("=");
     DerY = new JButton("y");
     
     DerFx.setBounds(550, 150, 80, 80);
@@ -140,7 +140,7 @@ public void crearDerivada(){
     DerMenos.setBounds(550, 700, 120, 120);
     DerMult.setBounds(425, 450, 120, 120);
     DerExp.setBounds(550, 450, 120, 120);
-    DerResultado.setBounds(675, 700, 120, 120);
+    DerIgual.setBounds(675, 700, 120, 120);
     DerY.setBounds(425, 575, 120, 120);
     DerAtras.setBounds(675, 450, 120, 120);
     
@@ -161,7 +161,7 @@ public void crearDerivada(){
     EstiloBoton(DerMenos);
     EstiloBoton(DerMult);
     EstiloBoton(DerExp);
-    EstiloBoton(DerResultado);
+    EstiloBoton(DerIgual);
     EstiloBoton(DerY);
     EstiloBoton(DerAtras);
     
@@ -172,10 +172,14 @@ public void crearDerivada(){
     DerEje.setHorizontalAlignment(JTextField.CENTER);
     DerEje.setEditable(false);
     DerFormula = new JTextField();
-    DerFormula.setBounds(50, 280, 900, 100);
+    DerFormula.setBounds(50, 280, 445, 100);
     DerFormula.setFont(new Font("Arial", Font.BOLD, 30));
     DerFormula.setHorizontalAlignment(JTextField.CENTER);
     DerFormula.setEditable(false);
+    DerResultado = new JTextField();
+    DerResultado.setBounds(500, 280, 445, 100);
+    DerResultado.setEditable(false);
+    DerResultado.setHorizontalAlignment(JTextField.CENTER);
     
     Derivada.add(DerFx);
     Derivada.add(DerFy);
@@ -194,9 +198,10 @@ public void crearDerivada(){
     Derivada.add(DerMenos);
     Derivada.add(DerMult);
     Derivada.add(DerExp);
-    Derivada.add(DerResultado);
+    Derivada.add(DerIgual);
     Derivada.add(DerEje);
     Derivada.add(DerFormula);
+    Derivada.add(DerResultado);
     Derivada.add(DerY);
     Derivada.add(btnIntegral);
     Derivada.add(DerAtras);
@@ -332,6 +337,14 @@ public void IngresoDatosDer(){
     DerAtras.addActionListener(e ->{
         DerFormula.setText("");
     });
+}
+
+public String ObtenerVariableDer(){
+    return DerEje.getText();
+}
+
+public String ObtenerFormulaDer(){
+    return DerFormula.getText();
 }
 
 public static void EstiloBoton(JButton boton){
