@@ -178,6 +178,7 @@ public void crearDerivada(){
     DerFormula.setEditable(false);
     DerResultado = new JTextField();
     DerResultado.setBounds(500, 280, 445, 100);
+    DerResultado.setFont(new Font("Arial", Font.BOLD, 30));
     DerResultado.setEditable(false);
     DerResultado.setHorizontalAlignment(JTextField.CENTER);
     
@@ -209,6 +210,12 @@ public void crearDerivada(){
     btnIntegral.addActionListener(e -> cambiarIntegral());
     
     IngresoDatosDer();
+    
+    DerIgual.addActionListener(e -> {
+    OperacionDerivacion operacion = new OperacionDerivacion(this); // le pasas la instancia actual
+    operacion.ProcesarDerivada();
+});
+
 }
 
 public void crearIntegral(){
@@ -345,6 +352,10 @@ public String ObtenerVariableDer(){
 
 public String ObtenerFormulaDer(){
     return DerFormula.getText();
+}
+
+public void MostrarResultadoDer(String resultado) {
+        DerResultado.setText(resultado);
 }
 
 public static void EstiloBoton(JButton boton){
