@@ -18,6 +18,7 @@ public class Calculadora extends JFrame {
     //Labels
     private JLabel lblBienvenida;
     private JButton btnDerivada, btnIntegral;
+    private JLabel signoIgual;
     
     //Botones Derivaciones
     private JButton Der0, Der1, Der2, Der3, Der4, Der5, Der6, Der7, Der8, Der9;
@@ -172,15 +173,23 @@ public void crearDerivada(){
     DerEje.setHorizontalAlignment(JTextField.CENTER);
     DerEje.setEditable(false);
     DerFormula = new JTextField();
-    DerFormula.setBounds(50, 280, 445, 100);
+    DerFormula.setBounds(35, 280, 445, 100);
     DerFormula.setFont(new Font("Arial", Font.BOLD, 30));
     DerFormula.setHorizontalAlignment(JTextField.CENTER);
     DerFormula.setEditable(false);
     DerResultado = new JTextField();
-    DerResultado.setBounds(500, 280, 445, 100);
+    DerResultado.setBounds(550, 280, 400, 100);
     DerResultado.setFont(new Font("Arial", Font.BOLD, 30));
     DerResultado.setEditable(false);
     DerResultado.setHorizontalAlignment(JTextField.CENTER);
+    
+    //Texto
+    signoIgual = new JLabel("=");
+    signoIgual.setBounds(500, 300, 50, 50);
+    signoIgual.setFont(new Font("Arial", Font.BOLD, 40));
+    signoIgual.setForeground(Color.WHITE);
+
+
     
     Derivada.add(DerFx);
     Derivada.add(DerFy);
@@ -206,6 +215,7 @@ public void crearDerivada(){
     Derivada.add(DerY);
     Derivada.add(btnIntegral);
     Derivada.add(DerAtras);
+    Derivada.add(signoIgual);
     
     btnIntegral.addActionListener(e -> cambiarIntegral());
     
