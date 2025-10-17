@@ -18,7 +18,7 @@ public class Calculadora extends JFrame {
     //Labels
     private JLabel lblBienvenida;
     private JButton btnDerivada, btnIntegral;
-    private JLabel signoIgual;
+    private JLabel signoIgual, signoIntg;
     
     //Botones Derivaciones
     private JButton Der0, Der1, Der2, Der3, Der4, Der5, Der6, Der7, Der8, Der9;
@@ -27,11 +27,13 @@ public class Calculadora extends JFrame {
     
     //Botones Integrales 
     private JButton Intg0, Intg1, Intg2, Intg3, Intg4, Intg5, Intg6, Intg7, Intg8, Intg9;
-    private JButton IntgX, IntgY, IntgExp, IntgMult, IntgResultado, IntgI;
+    private JButton IntgX, IntgY, IntgMas, IntgMenos, IntgAtras, IntgExp, IntgMult, IntgIgual, IntgI;
+    private JButton IntgFx, IntgFy;
     
     //Texfield entrada de Formula
-    private JTextField DerFormula, DerResultado, IntgFormula;
-    private JTextField DerEje;
+    private JTextField DerFormula, DerResultado;
+    private JTextField IntgFormula, IntgResultado, LiInferior, LiSuperior;
+    private JTextField DerEje, IntgEje;
     
 public Calculadora(){
     cardlayout = new CardLayout();
@@ -241,6 +243,8 @@ public void crearIntegral(){
     btnDerivada.setBounds(350, 30, 300, 40);
     
         //Botones de Accion
+    IntgFx = new JButton ("fx");
+    IntgFy = new JButton ("fy");
     Intg0 = new JButton("0");
     Intg1 = new JButton("1");
     Intg2 = new JButton("2");
@@ -253,12 +257,18 @@ public void crearIntegral(){
     Intg9 = new JButton("9");
     IntgX = new JButton("x");
     IntgY = new JButton("y");
+    IntgMas = new JButton ("+");
+    IntgMenos = new JButton ("-");
     IntgMult = new JButton("*");
     IntgExp = new JButton("^");
-    IntgResultado = new JButton("=");
+    IntgIgual = new JButton("=");
     IntgI = new JButton("∫");
+    IntgAtras = new JButton ("Limpiar");
     
     
+    
+    IntgFx.setBounds(550, 150, 80, 80);
+    IntgFy.setBounds(640, 150, 80, 80);
     Intg0.setBounds(175, 825, 120, 120);
     Intg1.setBounds(50, 700, 120, 120);
     Intg2.setBounds(175, 700, 120, 120);
@@ -271,12 +281,17 @@ public void crearIntegral(){
     Intg9.setBounds(300, 450, 120, 120);
     IntgX.setBounds(550, 575, 120, 120);
     IntgY.setBounds(425, 575, 120, 120);
+    IntgMas.setBounds(425, 700, 120, 120);
+    IntgMenos.setBounds(550, 700, 120, 120);
     IntgMult.setBounds(425, 450, 120, 120);
     IntgExp.setBounds(550, 450, 120, 120);
-    IntgResultado.setBounds(550, 700, 120, 120);
-    IntgI.setBounds(425, 700, 120, 120);
+    IntgIgual.setBounds(675, 700, 120, 120);
+    IntgI.setBounds(675, 575, 120, 120);
+    IntgAtras.setBounds(675, 450, 120, 120);
     
     
+    EstiloBoton(IntgFx);
+    EstiloBoton(IntgFy);
     EstiloBoton(Intg0);
     EstiloBoton(Intg1);
     EstiloBoton(Intg2);
@@ -289,19 +304,63 @@ public void crearIntegral(){
     EstiloBoton(Intg9);
     EstiloBoton(IntgX);
     EstiloBoton(IntgY);
+    EstiloBoton(IntgMas);
+    EstiloBoton(IntgMenos);
     EstiloBoton(IntgMult);
     EstiloBoton(IntgExp);
-    EstiloBoton(IntgResultado);
+    EstiloBoton(IntgIgual);
     EstiloBoton(IntgI);
+    EstiloBoton(IntgAtras);
     
     
     // Formula
+    IntgEje = new JTextField();
+    IntgEje.setBounds(300, 150, 120, 80);
+    IntgEje.setFont(new Font("Arial", Font.BOLD, 30));
+    IntgEje.setHorizontalAlignment(JTextField.CENTER);
+    IntgEje.setEditable(false);
+    
     IntgFormula = new JTextField();
-    IntgFormula.setBounds(50, 200, 900, 100);
+    IntgFormula.setBounds(115, 280, 365, 100);
     IntgFormula.setFont(new Font("Arial", Font.BOLD, 30));
     IntgFormula.setHorizontalAlignment(JTextField.CENTER);
     IntgFormula.setEditable(false);
     
+    IntgResultado = new JTextField();
+    IntgResultado.setBounds(550, 280, 400, 100);
+    IntgResultado.setFont(new Font("Arial", Font.BOLD, 30));
+    IntgResultado.setEditable(false);
+    IntgResultado.setHorizontalAlignment(JTextField.CENTER);
+    
+    LiSuperior = new JTextField();
+    LiSuperior.setBounds(65, 265, 30, 30);
+    LiSuperior.setFont(new Font("Arial", Font.BOLD, 20));
+    LiSuperior.setHorizontalAlignment(JTextField.CENTER);
+    LiSuperior.setEditable(false);
+    
+    LiInferior = new JTextField();
+    LiInferior.setBounds(65, 355, 30, 30);
+    LiInferior.setFont(new Font("Arial", Font.BOLD, 20));
+    LiInferior.setHorizontalAlignment(JTextField.CENTER);
+    LiInferior.setEditable(false);
+      
+    
+    //Texto
+    signoIgual = new JLabel("=");
+    signoIgual.setBounds(500, 300, 50, 50);
+    signoIgual.setFont(new Font("Arial", Font.BOLD, 40));
+    signoIgual.setForeground(Color.WHITE);
+    
+    signoIntg = new JLabel("∫");
+    signoIntg.setBounds(40, 300, 50, 50);
+    signoIntg.setFont(new Font("Arial", Font.BOLD, 40));
+    signoIntg.setForeground(Color.WHITE);
+    
+    
+    
+    
+    Integral.add(IntgFx);
+    Integral.add(IntgFy);
     Integral.add(Intg0);
     Integral.add(Intg1);
     Integral.add(Intg2);
@@ -314,14 +373,25 @@ public void crearIntegral(){
     Integral.add(Intg9);
     Integral.add(IntgX);
     Integral.add(IntgY);
+    Integral.add(IntgMas);
+    Integral.add(IntgMenos);
     Integral.add(IntgMult);
     Integral.add(IntgExp);
-    Integral.add(IntgResultado);
+    Integral.add(IntgIgual);
     Integral.add(IntgFormula);
     Integral.add(IntgI);
     Integral.add(btnDerivada);
+    Integral.add(IntgAtras);
+    Integral.add(IntgEje);
+    Integral.add(IntgResultado);
+    Integral.add(signoIgual);
+    Integral.add(signoIntg);
+    Integral.add(LiSuperior);
+    Integral.add(LiInferior);
     
     btnDerivada.addActionListener(e -> cambiarDerivada());
+  
+    IngresoDatosIntg();
     
 }
 
@@ -354,6 +424,30 @@ public void IngresoDatosDer(){
     DerAtras.addActionListener(e ->{
         DerFormula.setText("");
         DerResultado.setText("");
+    });
+}
+
+public void IngresoDatosIntg(){
+    JButton[] botonesEje = {IntgFx, IntgFy};
+    
+    for (JButton Eje: botonesEje){
+        Eje.addActionListener(e ->{
+            IntgEje.setText(Eje.getText());
+        });
+    }
+    
+    JButton[] botones = {Intg0, Intg1, Intg2, Intg3, Intg4, Intg5, Intg6, Intg7, Intg8, Intg9,
+                         IntgX, IntgY, IntgMas, IntgMenos, IntgMult, IntgExp};
+    
+    for (JButton boton: botones){
+        boton.addActionListener(e -> {
+            IntgFormula.setText(IntgFormula.getText() + boton.getText());
+        });
+    }
+    
+    IntgAtras.addActionListener(e ->{
+        IntgFormula.setText("");
+        IntgResultado.setText("");
     });
 }
 
