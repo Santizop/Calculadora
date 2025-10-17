@@ -137,13 +137,13 @@ public void crearDerivada(){
     Der7.setBounds(50, 450, 120, 120);
     Der8.setBounds(175, 450, 120, 120);
     Der9.setBounds(300, 450, 120, 120);
-    DerX.setBounds(550, 575, 120, 120);
+    DerX.setBounds(425, 575, 120, 120);
+    DerY.setBounds(550, 575, 120, 120);
     DerMas.setBounds(425, 700, 120, 120);
     DerMenos.setBounds(550, 700, 120, 120);
     DerMult.setBounds(425, 450, 120, 120);
     DerExp.setBounds(550, 450, 120, 120);
     DerIgual.setBounds(675, 700, 120, 120);
-    DerY.setBounds(425, 575, 120, 120);
     DerAtras.setBounds(675, 450, 120, 120);
     
     EstiloBoton(DerFx);
@@ -173,11 +173,13 @@ public void crearDerivada(){
     DerEje.setFont(new Font("Arial", Font.BOLD, 30));
     DerEje.setHorizontalAlignment(JTextField.CENTER);
     DerEje.setEditable(false);
+    
     DerFormula = new JTextField();
     DerFormula.setBounds(35, 280, 445, 100);
     DerFormula.setFont(new Font("Arial", Font.BOLD, 30));
     DerFormula.setHorizontalAlignment(JTextField.CENTER);
     DerFormula.setEditable(false);
+    
     DerResultado = new JTextField();
     DerResultado.setBounds(550, 280, 400, 100);
     DerResultado.setFont(new Font("Arial", Font.BOLD, 30));
@@ -218,7 +220,7 @@ public void crearDerivada(){
     Derivada.add(DerAtras);
     Derivada.add(signoIgual);
     
-    btnIntegral.addActionListener(e -> cambiarIntegral());
+
     
     IngresoDatosDer();
     
@@ -227,6 +229,7 @@ public void crearDerivada(){
     operacion.ProcesarDerivada();
 });
 
+    btnIntegral.addActionListener(e -> cambiarIntegral());
 }
 
 public void crearIntegral(){
@@ -270,12 +273,12 @@ public void crearIntegral(){
     Intg7.setBounds(50, 450, 120, 120);
     Intg8.setBounds(175, 450, 120, 120);
     Intg9.setBounds(300, 450, 120, 120);
-    IntgX.setBounds(550, 575, 120, 120);
-    IntgMas.setBounds(425, 700, 120, 120);
-    IntgMenos.setBounds(550, 700, 120, 120);
+    IntgX.setBounds(425, 700, 120, 120);
+    IntgMas.setBounds(425, 575, 120, 120);
+    IntgMenos.setBounds(550, 575, 120, 120);
     IntgMult.setBounds(425, 450, 120, 120);
     IntgExp.setBounds(550, 450, 120, 120);
-    IntgIgual.setBounds(675, 700, 120, 120);
+    IntgIgual.setBounds(550, 700, 120, 120);
     IntgAtras.setBounds(675, 450, 120, 120);
     
     EstiloBoton(Intg0);
@@ -385,10 +388,17 @@ public void crearIntegral(){
 }
 
 public void cambiarDerivada(){
+    LiSuperior.setText("");
+    LiInferior.setText("");
+    IntgFormula.setText("");
+    IntgResultado.setText("");
     cardlayout.show(PanelPrincipal, "derivada");
 }
 
 public void cambiarIntegral(){
+    DerEje.setText("");
+    DerFormula.setText("");
+    DerResultado.setText("");
     cardlayout.show(PanelPrincipal, "integral");
 }
 
