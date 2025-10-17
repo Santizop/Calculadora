@@ -15,7 +15,7 @@ public class OperacionDerivacion {
     }
 
     public void ProcesarDerivada() {
-        Variable = calculadora.ObtenerVariableDer(); // f(x) o f(y)
+        Variable = calculadora.ObtenerVariableDer();
         Formula = calculadora.ObtenerFormulaDer();
 
         if (Variable.equals("fx")) {
@@ -71,10 +71,10 @@ private String Derivar(String formula, String var) {
             }
         }
 
-        // 🔹 Si el término derivado es válido, agregamos su signo correctamente
+        // Agregamos Simbolo
         String termFinal = termResult.toString().trim();
         if (!termFinal.equals("") && !termFinal.equals("0")) {
-            // Determinar el signo original del término
+            // Ver cual es el signo
             boolean esNegativo = t.startsWith("-");
             if (resultado.length() == 0) {
                 resultado.append(esNegativo ? "-" : "");
@@ -107,6 +107,7 @@ private String DerivarFactor(String factor, String var) {
         coef = Integer.parseInt(coefStr);
         exp = Integer.parseInt(partes[1].trim());
 
+        // Si el exponente es 0 el resultado es 0
         if (exp == 0) return "0";
         
         int nuevoCoef = coef * exp;
@@ -119,7 +120,6 @@ private String DerivarFactor(String factor, String var) {
         else
             return nuevoCoef + var + "^" + nuevoExp;
     } else {
-        // Caso simple: "3x" o "x"
         String coefStr = factor.replace(var, "").replace("+", "").trim();
         if (coefStr.equals("") || coefStr.equals("+")) coefStr = "1";
         if (coefStr.equals("-")) coefStr = "-1";
