@@ -38,6 +38,15 @@ public class OperacionDerivacion {
     }
     
 private String Derivar(String formula, String var) {
+    if (formula.matches(".*[a-zA-Z]\\s*[a-zA-Z].*") && !formula.contains("*")) {
+        JOptionPane.showMessageDialog(calculadora,
+            "Formato inválido: usa '*' para multiplicar variables.\n" +
+            "Ejemplo correcto: x*y en lugar de xy",
+            "Error de formato",
+            JOptionPane.ERROR_MESSAGE);
+        return "Error: formato inválido";
+    }
+    
     String[] terminos = formula.split("(?=[+-])");
     StringBuilder resultado = new StringBuilder();
 

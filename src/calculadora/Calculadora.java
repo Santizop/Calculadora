@@ -190,7 +190,6 @@ public void crearDerivada(){
     signoIgual.setFont(new Font("Arial", Font.BOLD, 40));
     signoIgual.setForeground(Color.WHITE);
 
-
     
     Derivada.add(DerFx);
     Derivada.add(DerFy);
@@ -382,6 +381,12 @@ public void crearIntegral(){
     
     IngresoDatosIntg();
     
+    IntgIgual.addActionListener(e -> {
+        OperacionIntegral integral = new OperacionIntegral(this);
+        double resultado = integral.ProcesarIntegral();
+        IntgResultado.setText(String.valueOf(resultado));
+    });
+    
 }
 
 public void cambiarDerivada(){
@@ -440,6 +445,18 @@ public String ObtenerVariableDer(){
 
 public String ObtenerFormulaDer(){
     return DerFormula.getText();
+}
+
+public String ObtenerFormulaIntg(){
+    return IntgFormula.getText();
+}
+
+public String ObtenerLimiteInferior(){
+    return LiInferior.getText();
+}
+
+public String ObtenerLimiteSuperior(){
+    return LiSuperior.getText();
 }
 
 public void MostrarResultadoDer(String resultado) {
