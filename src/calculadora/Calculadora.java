@@ -257,7 +257,6 @@ public void crearIntegral(){
     IntgX = new JButton("x");
     IntgMas = new JButton ("+");
     IntgMenos = new JButton ("-");
-    IntgMult = new JButton("*");
     IntgExp = new JButton("^");
     IntgIgual = new JButton("=");
     IntgAtras = new JButton ("Limpiar");
@@ -275,10 +274,9 @@ public void crearIntegral(){
     IntgX.setBounds(425, 700, 120, 120);
     IntgMas.setBounds(425, 575, 120, 120);
     IntgMenos.setBounds(550, 575, 120, 120);
-    IntgMult.setBounds(425, 450, 120, 120);
-    IntgExp.setBounds(550, 450, 120, 120);
+    IntgExp.setBounds(425, 450, 120, 120);
     IntgIgual.setBounds(550, 700, 120, 120);
-    IntgAtras.setBounds(675, 450, 120, 120);
+    IntgAtras.setBounds(550, 450, 120, 120);
     
     EstiloBoton(Intg0);
     EstiloBoton(Intg1);
@@ -293,7 +291,6 @@ public void crearIntegral(){
     EstiloBoton(IntgX);
     EstiloBoton(IntgMas);
     EstiloBoton(IntgMenos);
-    EstiloBoton(IntgMult);
     EstiloBoton(IntgExp);
     EstiloBoton(IntgIgual);
     EstiloBoton(IntgAtras);
@@ -347,7 +344,6 @@ public void crearIntegral(){
     Integral.add(IntgX);
     Integral.add(IntgMas);
     Integral.add(IntgMenos);
-    Integral.add(IntgMult);
     Integral.add(IntgExp);
     Integral.add(IntgIgual);
     Integral.add(IntgFormula);
@@ -433,7 +429,7 @@ public void IngresoDatosDer(){
 
 public void IngresoDatosIntg(){
     JButton[] botones = {Intg0, Intg1, Intg2, Intg3, Intg4, Intg5, Intg6, Intg7, Intg8, Intg9,
-                         IntgX, IntgMas, IntgMenos, IntgMult, IntgExp};
+                         IntgX, IntgMas, IntgMenos, IntgExp};
     
     for (JButton boton: botones){
         boton.addActionListener(e -> {
