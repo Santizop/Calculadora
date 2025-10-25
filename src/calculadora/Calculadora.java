@@ -4,6 +4,7 @@
  */
 package calculadora;
 import java.awt.*;
+import java.io.File;
 import javax.swing.*;
 
 /**
@@ -19,6 +20,9 @@ public class Calculadora extends JFrame {
     private JLabel lblBienvenida;
     private JButton btnDerivada, btnIntegral;
     private JLabel signoIgual, signoIntg;
+    
+    // Boton de Manual
+    private JButton btnManual;
     
     //Botones Derivaciones
     private JButton Der0, Der1, Der2, Der3, Der4, Der5, Der6, Der7, Der8, Der9;
@@ -83,12 +87,20 @@ public void crearMenu(){
     btnIntegral.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
     btnIntegral.setBounds(550, 600, 300, 40);
     
+    btnManual = new JButton("Manual");
+    btnManual.setFont(new Font("Arial", Font.BOLD, 16));
+    btnManual.setBackground(new Color(48, 188, 237));
+    btnManual.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
+    btnManual.setBounds(750, 850, 180, 40);
+        
     Menu.add(lblBienvenida);
     Menu.add(btnDerivada);
     Menu.add(btnIntegral);
+    Menu.add(btnManual);
     
     btnDerivada.addActionListener(e -> cambiarDerivada());
     btnIntegral.addActionListener(e -> cambiarIntegral());
+    btnManual.addActionListener(e -> mostrarPDF());
 }
 
 public void crearDerivada(){
@@ -382,7 +394,7 @@ public void crearIntegral(){
     
     IntgIgual.addActionListener(e -> {
         OperacionIntegral integral = new OperacionIntegral(this);
-        double resultado = integral.ProcesarIntegral();
+        String resultado = integral.ProcesarIntegral();
         IntgResultado.setText(String.valueOf(resultado));
     });
     
@@ -474,6 +486,20 @@ public static void EstiloBoton(JButton boton){
     boton.setBackground(new Color(48, 188, 237));
 }
 
+private void mostrarPDF(){
+    try{
+        File pdf = new File("manual.pdf");
+        if (pdf.exists()) {
+         if (Desktop.isDesktopSupported()){   
+            Desktop.getDesktop().open(pdf);
+            } else {
+            JOptionPane.showMessageDialog(this, "No se puede abrir el pdf en el sistema.", "Error para abrir el archivo", JOptionPane.ERROR_MESSAGE, null);
+            }
+        }
+    } catch (Exception ex){
+        ex.printStackTrace();
+    }    
+}
 
     /**
      * @param args the command line arguments
